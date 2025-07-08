@@ -30,7 +30,7 @@ function Navbar() {
             <div className="absolute left-1/2 transform -translate-x-1/2 mt-1 w-1 h-1 bg-[#e54300] rounded-full" />
           </Link>
 
-          <Link to="/cardapio" className="flex items-center gap-1 hover:text-[#e54300] transition">
+          <Link to="/produtos" className="flex items-center gap-1 hover:text-[#e54300] transition">
             Cardápio <FaAngleDown className="text-xs" />
           </Link>
 
