@@ -1,13 +1,15 @@
-import './App.css'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Cadastro from "./pages/Cadastro/Cadastro";
 
 function App() {
-  
-
   return (
-    
-      <h1>Começo</h1>
-    
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/cadastro" element={<Cadastro />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
