@@ -25,6 +25,11 @@ function App() {
               <Route element={ <DefaultLayout /> }>
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
+                <Route path="/produtos" element={<Produtos />} />
+                <Route path="/categorias" element={<Categorias />} />
+                <Route path="/novoproduto" element={<ProdutoForm />} />
+                <Route path="/editarproduto/:id" element={<ProdutoForm />} />
+                <Route path="/sobre" element={<About />} />
               </Route>
             </Routes>
           </div>
