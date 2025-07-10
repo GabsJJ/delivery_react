@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import Login from './pages/login/Login';
+import Login from './pages/login/login';
 import Home from './pages/home/Home';
 import { AuthProvider } from './contexts/AuthContext/AuthProvider'
 import { CartProvider } from './contexts/CartContext/CartProvider';  // ✅ importa aqui

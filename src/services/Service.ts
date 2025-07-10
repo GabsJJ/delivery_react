@@ -1,6 +1,5 @@
 import axios from "axios";
 import type Usuario from "@/models/Usuario"; // Se este 'Usuario' for diferente de
-import type UsuarioLogin from "@/models/UsuarioLogin"; // Adicione esta linha
 
 const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL
@@ -17,10 +16,11 @@ export const cadastrarUsuario = async (
 
 export const login = async (
   url: string,
-  dados: object
-): Promise<UsuarioLogin> => {
+  dados: object,
+  setDados: (usuario: Usuario) => void
+) => {
   const resposta = await api.post(url, dados);
-  return resposta.data;
+  setDados(resposta.data);
 };
 
 export const buscar = async <T = unknown>(
