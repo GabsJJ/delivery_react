@@ -1,17 +1,16 @@
 import './App.css'
-import ListaCategoria from './components/listacategoria/ListaCategoria'
-import Categorias from './pages/categorias/Categorias'
 
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/home/Home";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
-import Cadastro from "./pages/cadastro/Cadastro";
 import { CartProvider } from "./contexts/CartProvider";
 import { ToastContainer } from "react-toastify";
 import Login from "./pages/login/login";
 import { AuthProvider } from "./contexts/AuthProvider";
+import Cadastro from './pages/Cadastro/Cadastro';
+import ListaCategoria from './components/listacategoria/ListaCategoria';
 function AppLayout() {
   const location = useLocation();
 
@@ -29,6 +28,7 @@ function AppLayout() {
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/categorias" element={<ListaCategoria />} />
         </Routes>
       </div>
 

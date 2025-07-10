@@ -12,23 +12,20 @@ import { TrashSimple } from "@phosphor-icons/react/dist/icons/TrashSimple";
 import { PencilSimple } from "@phosphor-icons/react/dist/icons/PencilSimple";
 
 interface CardCategoriaProps {
-	categoria: Categoria | null;
+	categoria: Categoria;
 }
 
 export default function CardCategoria({ categoria }: CardCategoriaProps) {
 	return (
 		<Card className="bg-white shadow-md hover:shadow-lg transition-shadow duration-300">
 			<CardHeader className="flex">
-				<CardTitle>Categoria</CardTitle>
+				<CardTitle>{categoria.nome}</CardTitle>
 			</CardHeader>
 
 			<CardContent>
 				<CardDescription className="flex text-left gap-2">
 					<span className="font-bold">Descrição: </span>
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores
-					optio magni nihil cupiditate, qui autem voluptate labore. Impedit
-					autem omnis voluptates at voluptatem voluptatibus, quos cum unde?
-					Consequatur, provident enim.
+					{categoria.descricao}
 				</CardDescription>
 			</CardContent>
 

@@ -32,6 +32,10 @@ export default function Navbar() {
             Cardápio <FaAngleDown className="text-xs" />
           </Link>
 
+          <Link to="/categorias" className="hover:text-[#e54300] transition">
+            Categorias
+          </Link>
+
           <Link to="/contato" className="hover:text-[#e54300] transition">
             Contato
           </Link>
