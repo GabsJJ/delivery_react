@@ -1,11 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 * {
   margin: 1;
@@ -30,6 +29,10 @@ body {
 
 
 @custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-inter: "Inter", "sans-serif";
+}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

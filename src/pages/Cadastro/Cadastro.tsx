@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ValidationError } from "yup";
 
-import { cadastrarUsuario } from "@/service/Service";
+import { cadastrarUsuario } from "@/services/Service";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";

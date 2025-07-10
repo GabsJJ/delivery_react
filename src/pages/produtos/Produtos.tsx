@@ -1,9 +1,9 @@
 // src/pages/Produtos.tsx
 
 import CardProduto from "@/components/produtos/CardProduto";
-import { AuthContext } from "@/contexts/AuthContext";
+import AuthContext from "@/contexts/AuthContext/AuthContext";
 import type Produto from "@/models/Produto";
-import { buscar, deletar } from "@/service/Service";
+import { buscar, deletar } from "@/services/Service";
 import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify"; // Verifique o caminho se necessário
@@ -63,7 +63,7 @@ export default function ProdutosPage() {
 					toast.success("Produto apagado com sucesso!");
 					fetchProdutos();
 				} catch (error: any) {
-					toast.error("Erro ao apagar o produto.");
+					toast.error("Erro ao apagar o produto.", error);
 				}
 			}
 		});

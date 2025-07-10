@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import CardCategoria from "../cardcategoria/CardCategoria";
 import { useContext, useEffect, useState } from "react";
 import type Categoria from "@/models/Categoria";
-import { AuthContext } from "@/contexts/AuthContext";
-import { buscar } from "@/service/Service";
+import AuthContext from "@/contexts/AuthContext/AuthContext";
+import { buscar } from "@/services/Service";
 import { BallTriangle } from "react-loader-spinner";
 
 function ListaCategoria() {

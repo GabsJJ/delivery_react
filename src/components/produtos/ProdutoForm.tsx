@@ -10,10 +10,10 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { atualizar, buscar, cadastrar } from "../../service/Service"; // Verifique o caminho se necessário
+import { atualizar, buscar, cadastrar } from "@/services/Service"; // Verifique o caminho se necessário
 import type Categoria from "@/models/Categoria";
 import type Produto from "@/models/Produto";
-import { AuthContext } from "@/contexts/AuthContext";
+import AuthContext from "@/contexts/AuthContext/AuthContext";
 
 // --- Interfaces e Componente Auxiliar (sem mudanças) ---
 interface FormFieldProps {
@@ -189,14 +189,14 @@ export default function ProdutoForm() {
 						<FormField
 							label="Descrição"
 							name="descricao"
-							value={produto.descricao}
+							value={produto.descricao? produto.descricao : ""}
 							onChange={handleChange}
 							placeholder="Pão, hambúrguer 200g, queijo..."
 						/>
 						<FormField
 							label="URL da Foto"
 							name="foto"
-							value={produto.foto}
+							value={produto.foto? produto.foto : ""}
 							onChange={handleChange}
 							placeholder="https://exemplo.com/foto.png"
 						/>

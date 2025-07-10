@@ -8,6 +8,10 @@ import { ToastContainer } from "react-toastify";
 import AuthLayout from './layouts/AuthLayout';
 import DefaultLayout from './layouts/DefaultLayout';
 import Cadastro from './pages/Cadastro/Cadastro';
+import Produtos from './pages/produtos/Produtos';
+import Categorias from './pages/categorias/Categorias';
+import ProdutoForm from './components/produtos/ProdutoForm';
+import About from './pages/About';
 
 function App() {
   return (
