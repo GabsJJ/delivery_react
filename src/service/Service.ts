@@ -1,4 +1,5 @@
-import type Usuario from "@/models/Usuario";
+import type Usuario from "@/models/Usuario"; // Se este 'Usuario' for diferente de
+import type UsuarioLogin from "@/models/UsuarioLogin"; // Adicione esta linha
 import axios from "axios";
 
 const api = axios.create({
@@ -8,8 +9,49 @@ const api = axios.create({
 export const cadastrarUsuario = async (
   url: string,
   dados: object,
-  setDados: (data: Usuario) => void
-): Promise<void> => {
+  setDados: (usuario: Usuario) => void
+) => {
   const resposta = await api.post(url, dados);
   setDados(resposta.data);
+};
+
+export const login = async (
+  url: string,
+  dados: object
+): Promise<UsuarioLogin> => {
+  const resposta = await api.post(url, dados);
+  return resposta.data;
+};
+
+export const buscar = async <T = unknown>(
+  url: string,
+  setDados: (data: T) => void,
+  header: object
+) => {
+  const resposta = await api.get<T>(url, header);
+  setDados(resposta.data);
+};
+
+export const cadastrar = async <T = unknown>(
+  url: string,
+  dados: object,
+  setDados: (data: T) => void,
+  header: object
+) => {
+  const resposta = await api.post<T>(url, dados, header);
+  setDados(resposta.data);
+};
+
+export const atualizar = async <T = unknown>(
+  url: string,
+  dados: object,
+  setDados: (data: T) => void,
+  header: object
+) => {
+  const resposta = await api.put<T>(url, dados, header);
+  setDados(resposta.data);
+};
+
+export const deletar = async (url: string, header: object) => {
+  await api.delete(url, header);
 };
