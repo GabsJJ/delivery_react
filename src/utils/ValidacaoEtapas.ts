@@ -1,13 +1,5 @@
+import type { DeepRequired } from "react-hook-form";
 import * as yup from "yup";
-import type Usuario from "@/models/Usuario";
-
-// Tipagem do formulário
-export type FormData = Omit<Usuario, "id" | "produtos"> & {
-  confirmaSenha: string;
-  aceitaTermos: boolean;
-  foto: string;
-  tipo: number;
-};
 
 // Constante de idade mínima
 const minAge = 13;
@@ -22,9 +14,8 @@ export const step1Schema = yup.object({
     .default(""),
 
   dataNascimento: yup
-    .string()
+    .date()
     .required("Data de nascimento é obrigatória")
-    .matches(/^\d{4}-\d{2}-\d{2}$/, "Formato inválido (AAAA-MM-DD)")
     .test("idade-minima", `É necessário ter no mínimo ${minAge} anos.`, function (value) {
       if (!value) return false;
       const birthDate = new Date(value);
@@ -37,7 +28,7 @@ export const step1Schema = yup.object({
 
       return age >= minAge;
     })
-    .default(""),
+    .default(new Date()),
 });
 
 // Etapa 2
@@ -50,7 +41,7 @@ export const step2Schema = yup.object({
 
   telefone: yup
     .string()
-    .required("Telefone é obrigatório")
+    .notRequired()
     .matches(/^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/, "Formato de telefone inválido")
     .default(""),
 });
@@ -84,20 +75,18 @@ export const step4Schema = yup.object({
 
   tipo: yup
     .number()
-    .notRequired()
     .default(0),
 
   aceitaTermos: yup
     .boolean()
-    .required("Você deve aceitar os termos")
     .oneOf([true], "Você deve aceitar os termos para continuar")
     .default(false),
 });
 
 // Schema completo com tipagem explícita
-export const fullCadastroSchema: yup.ObjectSchema<FormData> = yup.object({
+export const fullCadastroSchema = yup.object({
   nome: step1Schema.fields.nome as yup.StringSchema<string>,
-  dataNascimento: step1Schema.fields.dataNascimento as yup.StringSchema<string>,
+  dataNascimento: step1Schema.fields.dataNascimento as yup.DateSchema<Date>,
   usuario: step2Schema.fields.usuario as yup.StringSchema<string>,
   telefone: step2Schema.fields.telefone as yup.StringSchema<string>,
   senha: step3Schema.fields.senha as yup.StringSchema<string>,
@@ -106,6 +95,9 @@ export const fullCadastroSchema: yup.ObjectSchema<FormData> = yup.object({
   tipo: step4Schema.fields.tipo as yup.NumberSchema<number>,
   aceitaTermos: step4Schema.fields.aceitaTermos as yup.BooleanSchema<boolean>,
 });
+
+// Tipagem do formulário
+export type FormDataType = DeepRequired<yup.InferType<typeof fullCadastroSchema>>;
 
 // Export agrupado por etapas
 export const schemas = {

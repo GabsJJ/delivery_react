@@ -1,12 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import Login from './pages/login/login';
+import Login from './pages/login/Login';
 import Home from './pages/home/Home';
 import { AuthProvider } from './contexts/AuthContext/AuthProvider'
 import { CartProvider } from './contexts/CartContext/CartProvider';  // ✅ importa aqui
 import { ToastContainer } from "react-toastify";
 import AuthLayout from './layouts/AuthLayout';
 import DefaultLayout from './layouts/DefaultLayout';
+import Cadastro from './pages/Cadastro/Cadastro';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Routes>
               <Route element={ <AuthLayout /> }>
                 <Route path='/login' element={<Login />} />
+                <Route path="/cadastro" element={<Cadastro />} />
               </Route>
 
               <Route element={ <DefaultLayout /> }>

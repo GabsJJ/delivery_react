@@ -18,20 +18,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ToastAlerta } from "@/utils/ToastAlerta";
-import type Usuario from "@/models/Usuario";
-import Button from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   step1Schema,
   step2Schema,
   step3Schema,
   step4Schema,
   fullCadastroSchema,
+  type FormDataType,
 } from "@/utils/ValidacaoEtapas";
-
-type FormData = Omit<Usuario, "id" | "produtos"> & {
-  confirmaSenha: string;
-  aceitaTermos: boolean;
-};
 
 const STEPS = [
   {
@@ -76,14 +71,14 @@ function CadastroNovo() {
     setValue,
     trigger,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<FormDataType>({ 
     resolver: yupResolver(fullCadastroSchema),
     mode: "onBlur",
     defaultValues: {
       nome: "",
       usuario: "",
       senha: "",
-      dataNascimento: "",
+      dataNascimento: new Date(0),
       foto: "",
       telefone: "",
       tipo: 0,
@@ -96,7 +91,7 @@ function CadastroNovo() {
 
   const handleNext = async () => {
     const fieldsToValidate = STEPS[currentStep - 1]
-      .fields as (keyof FormData)[];
+      .fields as (keyof FormDataType)[];
     setIsLoading(true);
     try {
       const isValidStep = await trigger(fieldsToValidate);
@@ -114,7 +109,7 @@ function CadastroNovo() {
 
   const handlePrev = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
 
-  const handleCadastrar = async (data: FormData) => {
+  const handleCadastrar = async (data: FormDataType) => {
     setIsLoading(true);
 
     try {

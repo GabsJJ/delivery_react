@@ -6,7 +6,7 @@ export default function DefaultLayout() {
   return (
     <>
       <Navbar />
-      <Outlet />
+        <Outlet />
       <Footer />
     </>
   );

@@ -1,65 +1,129 @@
-import { LImage } from "@/components/limage/LImage"
-import { Button } from "@/components/ui/button"
+import { useState, useContext, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import AuthContext from "@/contexts/AuthContext/AuthContext";
 import {
   Card,
-  CardAction,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+  CardDescription,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { RotatingLines } from "react-loader-spinner";
+import type UsuarioLogin from "@/models/UsuarioLogin";
+import { Button } from "@/components/ui/button";
+import './glass.css'
+import { LImage } from "@/components/limage/LImage";
 
-const Login = () => {
-    return (
-        <div className="flex justify-between items-center h-screen bg-amber-100">
-            <div className="w-full md:w-1/2 mx-2 flex justify-center">
-                <Card className="w-full max-w-lg">
-                    <CardHeader>
-                        <CardTitle className="text-[#e54300] font-bold text-2xl">Login</CardTitle>
-                        <CardDescription>
-                            Insira seu email abaixo para entrar na sua conta
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <form>
-                            <div className="flex flex-col gap-6">
-                                <div className="grid gap-2">
-                                    <Label htmlFor="email">Email</Label>
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        placeholder="m@exemplo.com"
-                                        required
-                                    />
-                                </div>
-                                <div className="grid gap-2">
-                                    <div className="flex items-center">
-                                        <Label htmlFor="password">Senha</Label>
-                                    </div>
-                                    <Input id="password" type="password" required />
-                                </div>
-                            </div>
-                        </form>
-                    </CardContent>
-                    <CardFooter className="flex-col gap-2">
-                        <Button type="submit" className="w-full bg-[#e54300] hover:bg-[#e54300]/90">
-                            Login
-                        </Button>
-                        <CardAction className="flex justify-center items-center w-full">
-                            <p className="text-sm">Não tem uma conta?</p>
-                            <Button variant="link" className="p-1 text-[#e54300]">Cadastre-se</Button>
-                        </CardAction>
-                    </CardFooter>
-                </Card>
+function Login() {
+  const navigate = useNavigate();
+  const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>(
+    {} as UsuarioLogin
+  );
+  const { usuario, handleLogin, isLoading } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (usuario.token !== "") {
+      navigate("/home");
+    }
+  }, [usuario.token, navigate]);
+
+  function atualizarEstado(e: React.ChangeEvent<HTMLInputElement>) {
+    setUsuarioLogin({ ...usuarioLogin, [e.target.name]: e.target.value });
+  }
+
+  function login(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    handleLogin(usuarioLogin);
+  }
+
+  return (
+    <div className="
+      min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-orange-700 px-4
+      w-screen
+    ">
+      <LImage src="/img/loginBg.png" alt="background" className="absolute inset-0 blur-[6px] object-cover w-full h-full md:w-1/2 " />
+      <Card className="max-w-sm w-full p-6 rounded-2xl shadow-xl border-none bg-white glass">
+        <CardHeader className="text-center space-y-2">
+          <img
+            src="https://ik.imagekit.io/asis0anat/Log%20in%20hero%20img.svg?updatedAt=1752147028924"
+            alt="Login"
+            className="w-20 h-20 mx-auto"
+          />
+          <CardTitle className="text-3xl font-bold text-orange-600">
+            Login
+          </CardTitle>
+          <CardDescription className="text-gray-800 text-sm">
+            Use seus dados e entre nessa missão com a gente!
+          </CardDescription>
+        </CardHeader>
+
+        <CardContent className="space-y-4">
+          <form onSubmit={login} className="space-y-4">
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="usuario">Usuário</Label>
+                <Input
+                  type="text"
+                  id="usuario"
+                  name="usuario"
+                  placeholder="Digite seu usuário"
+                  value={usuarioLogin.usuario}
+                  onChange={atualizarEstado}
+                  className="bg-orange-50 border border-orange-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 text-gray-800 placeholder-orange-300 rounded-lg transition-all duration-300"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="senha">Senha</Label>
+                <Input
+                  type="password"
+                  id="senha"
+                  name="senha"
+                  placeholder="Digite sua senha"
+                  value={usuarioLogin.senha}
+                  onChange={atualizarEstado}
+                  className="bg-orange-50 border border-orange-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 text-gray-800 placeholder-orange-300 rounded-lg transition-all duration-300"
+                />
+              </div>
             </div>
-            <div className="md:block md:w-1/2 h-auto hidden">
-                <LImage src="/img/loginBg.png" alt="background-image" className="w-full h-auto" />
-            </div>
-        </div>
-    )
+
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-2 text-sm font-semibold rounded-lg flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white transition-all duration-300"
+            >
+              {isLoading ? (
+                <>
+                  <RotatingLines
+                    strokeColor="white"
+                    strokeWidth="5"
+                    animationDuration="0.75"
+                    width="18"
+                    visible
+                  />
+                  Entrando...
+                </>
+              ) : (
+                "Entrar"
+              )}
+            </Button>
+          </form>
+
+          <p className="text-center text-sm text-gray-800">
+            Não tem conta?{" "}
+            <Link
+              to="/cadastro"
+              className="text-orange-600 font-semibold underline hover:text-orange-700"
+            >
+              Cadastre-se!
+            </Link>
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  );
 }
 
-export default Login
+export default Login;
