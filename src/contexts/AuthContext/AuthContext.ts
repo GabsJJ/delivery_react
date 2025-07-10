@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import type UsuarioLogin from "../../models/UsuarioLogin";
 
 interface AuthContextProps {
 	usuario: UsuarioLogin

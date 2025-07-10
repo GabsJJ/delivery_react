@@ -1,8 +1,8 @@
 import type Produto from "./Produto";
 
 export default interface Categoria {
-  id: number;
+  id?: number;
   nome: string;
-  descricao: string;
+  descricao?: string;
   produtos?: Produto[] | null;
 }

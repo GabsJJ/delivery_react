@@ -2,7 +2,7 @@ import logo from '../../assets/logo_navbar2.svg';
 import { FaShoppingBag, FaAngleDown, FaSignInAlt } from 'react-icons/fa';
 import { FiSearch } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { useCart } from '../../contexts/CartContext/CartContext';
+import { useCart } from '../../contexts/CartContext/useCart';
 
 function Navbar() {
   const { cartItemCount } = useCart();

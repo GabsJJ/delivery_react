@@ -1,7 +1,6 @@
 import React, { type JSX } from 'react';
 import { Link } from 'react-router-dom'; // Usando Link para navegação interna
 import { FaInstagram, FaFacebookF, FaTwitter } from 'react-icons/fa';
-import { FiSend } from 'react-icons/fi';
 
 function Footer(): JSX.Element {
   const currentYear = new Date().getFullYear();

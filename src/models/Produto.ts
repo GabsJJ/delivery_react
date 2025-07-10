@@ -2,14 +2,14 @@ import type Categoria from "./Categoria";
 import type Usuario from "./Usuario";
 
 export default interface Produto {
-  id: number;
+  id?: number;
   nome: string;
-  descricao: string;
+  descricao?: string;
   preco: number;
-  foto: string;
-  categoria: Categoria | undefined;
-  usuario: Usuario | undefined;
-  calorias: number;
+  foto?: string;
+  categoria?: Categoria | undefined;
+  usuario?: Usuario | undefined;
+  calorias?: number;
   energia: number;
   acucares: number;
   gordurasSaturadas: number;
@@ -17,5 +17,5 @@ export default interface Produto {
   proteinas: number;
   fibras: number;
   frutas: number;
-  nutriscore: number;
+  nutriscore?: number;
 }
