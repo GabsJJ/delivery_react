@@ -1,5 +1,4 @@
-import React from 'react';
-import { Star, PlayCircle, ArrowUpRight } from 'lucide-react';
+import { Star, ArrowUpRight } from 'lucide-react';
 
 const HeroSection = () => {
   const IMAGES = {
