@@ -141,6 +141,8 @@ export default function ProdutoForm() {
 		}
 		const dadosParaApi = { ...produto };
 		delete dadosParaApi.id;
+    dadosParaApi.calorias = Math.round(dadosParaApi.energia * 0.239006);
+    dadosParaApi.nutriscore = 0; // Inicializando nutriscore, se necessário
 		try {
 			if (isEditing && produto.id) {
         dadosParaApi.id = produto.id;
@@ -238,24 +240,6 @@ export default function ProdutoForm() {
 
 					{/* Coluna 2 - Informações Nutricionais */}
 					<div className="space-y-4">
-						<FormField
-							label="Calorias (kcal)"
-							name="calorias"
-							type="number"
-							value={produto.calorias}
-							onChange={handleChange}
-							placeholder="Ex: 550"
-							required={false}
-						/>
-						<FormField
-							label="Nutri-Score"
-							name="nutriscore"
-							type="number"
-							value={produto.nutriscore}
-							onChange={handleChange}
-							placeholder="Ex: 4"
-							required={false}
-						/>
 						<FormField
 							label="Energia (kJ)"
 							name="energia"
