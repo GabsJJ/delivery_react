@@ -12,6 +12,7 @@ import Produtos from './pages/produtos/Produtos';
 import Categorias from './pages/categorias/Categorias';
 import ProdutoForm from './components/produtos/ProdutoForm';
 import About from "./pages/About";
+import SobreEquipe from "./pages/sobreequipe/SobreEquipe";
 function AppLayout() {
   const location = useLocation();
 
@@ -34,6 +35,7 @@ function AppLayout() {
           <Route path="/novoproduto" element={<ProdutoForm />} />
           <Route path="/editarproduto/:id" element={<ProdutoForm />} />
           <Route path="/sobre" element={<About />} />
+          <Route path="/equipe" element={<SobreEquipe />} />
         </Routes>
       </div>
 

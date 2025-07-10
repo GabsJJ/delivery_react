@@ -36,7 +36,7 @@ export default function Navbar() {
             Categorias
           </Link>
 
-          <Link to="/sobre" className="hover:text-[#e54300] transition">
+          <Link to="/equipe" className="hover:text-[#e54300] transition">
             Contato
           </Link>
         </div>
