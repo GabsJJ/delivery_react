@@ -1,11 +1,13 @@
 import './App.css'
+import ListaCategoria from './components/listacategoria/ListaCategoria'
+import Categorias from './pages/categorias/Categorias'
 
 function App() {
   
 
   return (
     
-      <h1>Começo</h1>
+      <Categorias />
     
   )
 }
