@@ -7,7 +7,7 @@ export default interface Usuario {
   senha: string;
   foto: string;
   telefone: string;
-  dataNascimento: Date;
+  dataNascimento: string;
   tipo: number;
   produtos?: Produto[] | null;
 }
