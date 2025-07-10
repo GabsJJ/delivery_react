@@ -18,7 +18,7 @@ export default function Navbar() {
         {/* Menu */}
         <div className="flex items-center gap-8 text-xl font-medium">
           <Link
-            to="/porque"
+            to="/sobre"
             className="relative text-[#e54300] hover:opacity-90 transition"
           >
             Por que GetFood?
@@ -36,7 +36,7 @@ export default function Navbar() {
             Categorias
           </Link>
 
-          <Link to="/contato" className="hover:text-[#e54300] transition">
+          <Link to="/sobre" className="hover:text-[#e54300] transition">
             Contato
           </Link>
         </div>

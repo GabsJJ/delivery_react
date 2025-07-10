@@ -8,10 +8,10 @@ import { ToastContainer } from "react-toastify";
 import Login from "./pages/login/login";
 import { AuthProvider } from "./contexts/AuthProvider";
 import Cadastro from './pages/Cadastro/Cadastro';
-import ListaCategoria from './components/listacategoria/ListaCategoria';
 import Produtos from './pages/produtos/Produtos';
 import Categorias from './pages/categorias/Categorias';
 import ProdutoForm from './components/produtos/ProdutoForm';
+import About from "./pages/About";
 function AppLayout() {
   const location = useLocation();
 
@@ -33,6 +33,7 @@ function AppLayout() {
           <Route path="/categorias" element={<Categorias />} />
           <Route path="/novoproduto" element={<ProdutoForm />} />
           <Route path="/editarproduto/:id" element={<ProdutoForm />} />
+          <Route path="/sobre" element={<About />} />
         </Routes>
       </div>
 
