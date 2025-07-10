@@ -26,7 +26,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            to="/cardapio"
+            to="/produtos"
             className="flex items-center gap-1 hover:text-[#e54300] transition"
           >
             Cardápio <FaAngleDown className="text-xs" />
