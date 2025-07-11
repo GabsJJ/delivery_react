@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 
 function Categorias() {
   return (
-    <div className="container mx-auto py-12 px-4 w-full">
-      <div className="flex justify-between px-4">
+    <div className="mx-auto py-12 px-4 w-screen">
+			<div className="container flex justify-between px-4">
         <h1 className="text-4xl font-bold text-gray-800">Categorias</h1>
         <Link
           to="/"

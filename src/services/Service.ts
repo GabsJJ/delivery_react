@@ -47,23 +47,21 @@ export const buscar = async <T = unknown>(
 export const cadastrar = async <T = unknown>(
   url: string,
   dados: object,
-  setDados: (data: T) => void,
-  header: object
+  setDados: (data: T) => void
 ) => {
-  const resposta = await api.post<T>(url, dados, header);
+  const resposta = await api.post<T>(url, dados);
   setDados(resposta.data);
 };
 
 export const atualizar = async <T = unknown>(
   url: string,
   dados: object,
-  setDados: (data: T) => void,
-  header: object
+  setDados: (data: T) => void
 ) => {
-  const resposta = await api.put<T>(url, dados, header);
+  const resposta = await api.put<T>(url, dados);
   setDados(resposta.data);
 };
 
-export const deletar = async (url: string, header: object) => {
-  await api.delete(url, header);
+export const deletar = async (url: string) => {
+  await api.delete(url);
 };
