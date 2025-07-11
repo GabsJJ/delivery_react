@@ -30,7 +30,7 @@ function Footer(): JSX.Element {
 
   return (
     <footer className="
-      bg-linear-to-b from-gray-300 from-90% to-gray-400
+      bg-linear-to-b from-white from-75% to-orange-300
       shadow-2xl/80
     ">
       <div className="container mx-auto px-6 py-8">
