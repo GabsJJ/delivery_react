@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function Categorias() {
   const navigate = useNavigate();
   return (
-    <main className="min-h-screen bg-white px-6 py-8">
+    <main className="mx-auto py-12 px-4 w-screen">
       <div className="max-w-5xl mx-auto flex flex-col gap-6">
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold text-gray-900">
@@ -26,7 +26,7 @@ function Categorias() {
         </div>
       </div>
     </main>
-  );
+  )
 }
 
 export default Categorias;

@@ -14,6 +14,7 @@ import { atualizar, buscar, cadastrar } from "@/services/Service"; // Verifique 
 import type Categoria from "@/models/Categoria";
 import type Produto from "@/models/Produto";
 import AuthContext from "@/contexts/AuthContext/AuthContext";
+import "@/utils/glass.css"
 
 // --- Interfaces e Componente Auxiliar (sem mudanças) ---
 interface FormFieldProps {
@@ -78,9 +79,7 @@ export default function ProdutoForm() {
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				await buscar("/categoria", setCategorias, {
-					headers: { Authorization: token },
-				});
+				await buscar("/categoria", setCategorias);
 			} catch (error: any) {
 				if (error.toString().includes("401")) {
 					handleLogout();
@@ -89,13 +88,7 @@ export default function ProdutoForm() {
 			}
 			if (id) {
 				try {
-					await buscar(
-						`/produtos/${id}`,
-						(dados: Produto) => setProduto(dados),
-						{
-							headers: { Authorization: token },
-						}
-					);
+					await buscar(`/produtos/${id}`,(dados: Produto) => setProduto(dados));
 				} catch (error: any) {
 					if (error.toString().includes("401")) {
 						handleLogout();
@@ -133,6 +126,7 @@ export default function ProdutoForm() {
 			setProduto((prev) => ({ ...prev, categoria: categoriaSelecionada }));
 		}
 	};
+
 	async function handleSubmit(e: FormEvent) {
 		e.preventDefault();
 		if (!produto.categoria) {
@@ -141,36 +135,31 @@ export default function ProdutoForm() {
 		}
 		const dadosParaApi = { ...produto };
 		delete dadosParaApi.id;
-    dadosParaApi.calorias = Math.round(dadosParaApi.energia * 0.239006);
-    dadosParaApi.nutriscore = 0; // Inicializando nutriscore, se necessário
+		dadosParaApi.calorias = Math.round(dadosParaApi.energia * 0.239006);
 		try {
 			if (isEditing && produto.id) {
-        dadosParaApi.id = produto.id;
-				await atualizar(`/produtos`, dadosParaApi, () => {}, {
-          headers: { Authorization: token }
-        });
+       			dadosParaApi.id = produto.id;
+				await atualizar(`/produtos`, dadosParaApi, () => {});
 				toast.success("Produto atualizado com sucesso!");
 			} else {
-				await cadastrar(`/produtos`, dadosParaApi, () => {}, {
-					headers: { Authorization: token }
-				});
+				await cadastrar(`/produtos`, dadosParaApi, () => {});
 				toast.success("Produto cadastrado com sucesso!");
 			}
 			navigate("/produtos");
 		} catch (error: any) {
-      if (error.toString().includes("401")) {
-						handleLogout();
-					}
+      		if (error.toString().includes("401")) {
+				handleLogout();
+			}
 			toast.error(`Erro ao salvar produto.`);
 		}
 	}
 	const isEditing = !!id;
 
 	return (
-		<div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+		<div className="flex justify-center items-center h-full p-4 bg-gray-100">
 			<form
 				onSubmit={handleSubmit}
-				className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-2xl"
+				className="glass p-8 rounded-2xl shadow-lg w-full max-w-2xl my-2"
 			>
 				<h2 className="text-3xl font-bold text-center text-[#e54300] mb-8">
 					{isEditing ? "Editar Produto" : "Cadastrar Produto"}

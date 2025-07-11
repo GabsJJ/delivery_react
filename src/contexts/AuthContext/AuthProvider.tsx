@@ -3,6 +3,7 @@ import AuthContext from "./AuthContext";
 import type UsuarioLogin from "@/models/UsuarioLogin";
 import { api, login } from "@/services/Service";
 import { ToastAlerta } from "@/utils/ToastAlerta";
+import { ClipLoader } from "react-spinners";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -70,9 +71,14 @@ export function AuthProvider({ children }: Readonly<AuthProviderProps>) {
     [isLoading, usuario]
   );
 
-  if (isLoading) return <></>;
+	if(isLoading)
+		return <div className="flex justify-center items-center w-screen h-screen">
+			<ClipLoader size={100} color="#e54300"/>
+		</div>
 
-  return (
-    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
-  );
+    return (
+        <AuthContext.Provider value={contextValue}>
+            {children}
+        </AuthContext.Provider>
+    )
 }
