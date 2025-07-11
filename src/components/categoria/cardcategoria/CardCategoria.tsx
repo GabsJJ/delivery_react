@@ -23,9 +23,9 @@ import { TrashSimple } from "@phosphor-icons/react";
 import { PencilSimple } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 import { deletar } from "@/service/Service";
-import { AuthContext } from "@/contexts/AuthContext";
 import { ToastAlerta } from "@/utils/ToastAlerta";
 import { useContext, useState } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 
 interface CardCategoriaProps {
   categoria: Categoria;

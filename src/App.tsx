@@ -5,16 +5,16 @@ import "./App.css";
 import Home from "./pages/home/Home";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/navbar/Navbar";
-import { CartProvider } from "./contexts/CartProvider";
 import { ToastContainer } from "react-toastify";
 import Login from "./pages/login/login";
-import { AuthProvider } from "./contexts/AuthProvider";
 import Produtos from "./pages/produtos/Produtos";
 import Categorias from "./pages/categorias/Categorias";
 import ProdutoForm from "./components/produtos/ProdutoForm";
 import Cadastro from "./pages/cadastro/Cadastro";
 import DeletarCategoria from "./components/categoria/deletarcategoria/DeletarCartegoria";
 import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
+import { CartProvider } from "./contexts/CartProvider";
+import { AuthProvider } from "./contexts/AuthProvider";
 function AppLayout() {
   const location = useLocation();
 
