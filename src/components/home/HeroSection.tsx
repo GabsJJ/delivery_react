@@ -13,8 +13,7 @@ const HeroSection = () => {
     SERVICE_IMAGE_3: "https://ik.imagekit.io/99o04eudvr/img_getfood/serv3(1).png?updatedAt=1752172668612"
   };
 
-  return (
-  
+  return (  
     <div className="bg-white">
       {/* HERO SECTION */}
       <section className="pt-20 pb-20">

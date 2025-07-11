@@ -4,6 +4,7 @@ import CardProduto from "@/components/produtos/CardProduto";
 import AuthContext from "@/contexts/AuthContext/AuthContext";
 import type Produto from "@/models/Produto";
 import { buscar, deletar } from "@/services/Service";
+import { PlusIcon } from "@phosphor-icons/react";
 import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify"; // Verifique o caminho se necessário
@@ -20,27 +21,33 @@ export default function ProdutosPage() {
 	// ... (lógica de fetchProdutos e useEffect continua a mesma)
 	async function fetchProdutos() {
 		try {
-			await buscar("/produtos", setProdutos, {
-				headers: { Authorization: token },
-			});
-		} catch (error: any) {
-			if (error.toString().includes("401")) {
-				handleLogout();
+			await buscar("/produtos", setProdutos);
+		} catch (error) {
+			if (typeof error === 'string' && error.toString().includes("401")) {
+				toast.error("Erro ao buscar produtos.");
 			}
-			toast.error("Erro ao buscar produtos.");
 		}
 	}
 
 	useEffect(() => {
-		fetchProdutos();
-	}, []);
+		async function fetchProdutosLocal() {
+			try {
+				await buscar("/produtos", setProdutos);
+			} catch (error) {
+				if (typeof error === 'string' && error.toString().includes("401")) {
+					toast.error("Erro ao buscar produtos.");	
+				}
+			}
+		};
+		fetchProdutosLocal();
+	}, [handleLogout, token]);
 
 	useEffect(() => {
 		if (token === "") {
-			alert("Você precisa estar logado para acessar essa página.");
 			navigate("/login");
+			toast.info("Você precisa estar logado para acessar essa página.");
 		}
-	}, [token]);
+	}, [navigate, token]);
 
 	// Função para deletar um produto com SweetAlert2 e novas cores
 	async function handleDelete(id: number) {
@@ -62,8 +69,9 @@ export default function ProdutosPage() {
 					});
 					toast.success("Produto apagado com sucesso!");
 					fetchProdutos();
-				} catch (error: any) {
-					toast.error("Erro ao apagar o produto.", error);
+				} catch (error) {
+					if(typeof error === 'string')
+						toast.error("Erro: " + error.toString());
 				}
 			}
 		});
@@ -75,10 +83,14 @@ export default function ProdutosPage() {
 				<h1 className="text-4xl font-bold text-gray-800">Nossos Produtos</h1>
 				<Link
 					to="/novoproduto"
-					// Cores do botão de cadastro atualizadas
-					className="bg-[#e54300] hover:bg-[#bf3700] text-white font-bold py-2 px-4 rounded-md transition-colors"
-				>
-					Cadastrar Novo Produto
+					className="
+						bg-[#e54300] hover:bg-[#bf3700]
+						text-white font-bold py-2 px-4 rounded-md 
+						transition-colors
+						flex items-center gap-2
+				">
+					<PlusIcon size={20} color="#fafafa" />
+					Novo Produto
 				</Link>
 			</div>
 

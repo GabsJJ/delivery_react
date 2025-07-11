@@ -29,8 +29,11 @@ function Footer(): JSX.Element {
   );
 
   return (
-    <footer className="bg-gray-300 border-t border-gray-400">
-      <div className="container mx-auto px-6 py-12">
+    <footer className="
+      bg-linear-to-b from-gray-300 from-90% to-gray-400
+      shadow-2xl/80
+    ">
+      <div className="container mx-auto px-6 py-8">
         {/* Grid principal que se adapta para telas menores */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Coluna 1: Logo e Social */}
