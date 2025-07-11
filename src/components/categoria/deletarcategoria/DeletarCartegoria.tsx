@@ -8,10 +8,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { AuthContext } from "@/contexts/AuthContext";
 import type Categoria from "@/models/Categoria";
-import { buscar, deletar } from "@/service/Service";
 import { ToastAlerta } from "@/utils/ToastAlerta";
+import AuthContext from "@/contexts/AuthContext/AuthContext";
+import { buscar, deletar } from "@/services/Service";
 
 function DeletarCategoria() {
   const navigate = useNavigate();
@@ -26,9 +26,7 @@ function DeletarCategoria() {
 
   async function buscarCategoriaPorId(id: string) {
     try {
-      await buscar(`/categoria/${id}`, setCategoria, {
-        headers: { Authorization: token },
-      });
+      await buscar(`/categoria/${id}`, setCategoria);
     } catch (error: any) {
       if (error.toString().includes("401")) {
         handleLogout();
@@ -53,9 +51,7 @@ function DeletarCategoria() {
     setIsLoading(true);
 
     try {
-      await deletar(`/categoria/${id}`, {
-        headers: { Authorization: token },
-      });
+      await deletar(`/categoria/${id}`);
 
       ToastAlerta("Categoria excluída com sucesso!", "sucesso");
     } catch (error: any) {
