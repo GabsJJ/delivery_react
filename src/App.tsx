@@ -12,7 +12,7 @@ import ProdutoForm from "./components/produtos/ProdutoForm";
 import About from "./pages/About";
 import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
 import SobreEquipe from "./pages/sobreequipe/SobreEquipe";
-import Cadastro from "@/pages/Cadastro/Cadastro";
+import Cadastro from "@/pages/cadastro/Cadastro";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
