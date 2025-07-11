@@ -9,8 +9,8 @@ import { CartProvider } from "./contexts/CartProvider";
 import { ToastContainer } from "react-toastify";
 import Login from "./pages/login/login";
 import { AuthProvider } from "./contexts/AuthProvider";
-import Cadastro from './pages/Cadastro/Cadastro';
 import ListaCategoria from './components/listacategoria/ListaCategoria';
+import Cadastro from './pages/cadastro/Cadastro';
 function AppLayout() {
   const location = useLocation();
 
