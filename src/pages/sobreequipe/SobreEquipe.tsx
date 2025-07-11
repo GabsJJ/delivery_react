@@ -102,7 +102,7 @@ const SobreEquipe = () => {
     return (
         <section
             ref={sectionRef}
-            className="relative min-h-screen bg-canvas text-canvasText py-20"
+            className="relative bg-canvas text-canvasText py-20"
         >
             <div className="fixed inset-0 -z-20 pointer-events-none bg-gray-300"></div>
 
