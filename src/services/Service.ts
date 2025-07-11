@@ -2,10 +2,9 @@ import axios from "axios";
 import type Usuario from "@/models/Usuario"; // Se este 'Usuario' for diferente de
 
 export const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL
-})
+  baseURL: import.meta.env.VITE_API_URL,
+});
 
-// Interceptor que adiciona o token antes de cada requisição
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -33,7 +32,7 @@ export const login = async (
 ) => {
   const resposta = await api.post(url, dados);
   setDados(resposta.data);
-  localStorage.setItem('token', resposta.data.token)
+  localStorage.setItem("token", resposta.data.token);
 };
 
 export const buscar = async <T = unknown>(
