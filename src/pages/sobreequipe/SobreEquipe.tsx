@@ -104,7 +104,7 @@ const SobreEquipe = () => {
             ref={sectionRef}
             className="relative bg-canvas text-canvasText py-20"
         >
-            <div className="fixed inset-0 -z-20 pointer-events-none bg-gray-300"></div>
+            <div className="fixed inset-0 -z-20 pointer-events-none"></div>
 
             <div className="container mx-auto px-4">
                 <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-16 relative z-10">
@@ -115,11 +115,11 @@ const SobreEquipe = () => {
                     {peopleData.map((person, index) => (
                         <div
                             key={person.id}
-                            className={`gsap-card-item flex flex-col md:flex-row items-center bg-amber-50 rounded-xl shadow-lg p-6 md:p-8 space-y-6 md:space-y-0 relative z-10
+                            className={`gsap-card-item flex flex-col md:flex-row items-center bg-gradient-to-br from-orange-100 to-orange-400 rounded-xl shadow-lg p-6 md:p-8 space-y-6 md:space-y-0 relative z-10
                 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} `}
                         >
                             {/* Photo Area */}
-                            <div className="w-full md:w-1/3 flex justify-center md:justify-start">
+                            <div className="flex justify-center md:justify-start mx-auto">
                                 <img
                                     src={person.photo}
                                     alt={`Foto de ${person.name}`}

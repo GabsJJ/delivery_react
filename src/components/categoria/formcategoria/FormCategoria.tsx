@@ -1,166 +1,167 @@
 import {
   useState,
-  useContext,
-  type ChangeEvent,
-  type FormEvent,
   useEffect,
+  type FormEvent,
+  type ChangeEvent,
+  useContext,
 } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import type Categoria from "../../../models/Categoria";
-import { RotatingLines } from "react-loader-spinner";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { atualizar, buscar, cadastrar } from "@/services/Service"; // Verifique o caminho se necessário
+import type Categoria from "@/models/Categoria";
 import AuthContext from "@/contexts/AuthContext/AuthContext";
-import { atualizar, buscar, cadastrar } from "@/services/Service";
 
-function FormCategoria() {
+// --- Interfaces e Componente Auxiliar (sem mudanças) ---
+interface FormFieldProps {
+  label: string;
+  name: string;
+  type?: "text" | "number";
+  value: string | number;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
+  required?: boolean;
+}
+
+const FormField = ({
+  label,
+  name,
+  type = "text",
+  value,
+  onChange,
+  placeholder,
+  required = true,
+}: FormFieldProps) => (
+  <div>
+    <label
+      htmlFor={name}
+      className="block text-sm font-bold text-gray-700 mb-2"
+    >
+      {label}
+    </label>
+    <input
+      id={name}
+      name={name}
+      type={type}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      required={required}
+      // Cor do anel de foco atualizada
+      className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#e54300]"
+      step={type === "number" ? "0.01" : undefined}
+    />
+  </div>
+);
+
+// --- Componente Principal do Formulário ---
+export default function FormCategorias() {
   const navigate = useNavigate();
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [categoria, setCategoria] = useState<Categoria>({
-    id: 0,
-    nome: "",
-    descricao: "",
-    produtos: [],
-  });
+  const { id } = useParams<{ id: string }>();
 
   const { usuario, handleLogout } = useContext(AuthContext);
   const token = usuario.token;
 
-  const { id } = useParams<{ id: string }>();
-
-  async function buscarCategoriaPorId(id: string) {
-    try {
-      await buscar(`/categoria/${id}`, setCategoria, {
-        headers: { Authorization: token },
-      });
-    } catch (error: any) {
-      if (error.toString().includes("401")) {
-        handleLogout();
-      }
-    }
-  }
-
   useEffect(() => {
     if (token === "") {
-      ToastAlerta("Você precisa estar logado!", "info");
-      navigate("/");
+      alert("Você precisa estar logado para acessar essa página.");
+      navigate("/login");
     }
   }, [token]);
 
+  // ... (toda a lógica de useState, useEffect, handleChange, etc. continua a mesma)
+  const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
   useEffect(() => {
-    if (id !== undefined) {
-      buscarCategoriaPorId(id);
-    } else {
-      setCategoria({
-        id: undefined,
-        nome: "",
-        descricao: "",
-      });
+    async function fetchData() {
+      if (id) {
+        try {
+          await buscar(
+            `/categoria/${id}`,
+            (dados: Categoria) => setCategoria(dados)
+          );
+        } catch (error: any) {
+          if (error.toString().includes("401")) {
+            handleLogout();
+          }
+          toast.error("Erro ao buscar dados da categoria.");
+        }
+      }
     }
+    fetchData();
   }, [id]);
 
-  function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
-    setCategoria({
-      ...categoria,
-      [e.target.name]: e.target.value,
-    });
-  }
-
-  async function gerarNovoCategoria(e: FormEvent<HTMLFormElement>) {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCategoria((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    setIsLoading(true);
-
-    if (id !== undefined) {
-      try {
-        await atualizar("/categoria", categoria, setCategoria, {
-          headers: { Authorization: token },
+    const dadosParaApi = { ...categoria };
+    delete dadosParaApi.id;
+    try {
+      if (isEditing && categoria.id) {
+        dadosParaApi.id = categoria.id;
+        await atualizar(`/categoria`, dadosParaApi, () => {}, {
+          headers: { Authorization: token }
         });
-
-        ToastAlerta("O Tema foi atualizado com sucesso!", "sucesso");
-      } catch (error: any) {
-        if (error.toString().includes("401")) {
-          handleLogout();
-        } else {
-          ToastAlerta("Erro ao atualizar o tema!", "erro");
-          console.error(error);
-        }
-      }
-    } else {
-      try {
-        await cadastrar("/categoria", categoria, setCategoria, {
-          headers: { Authorization: token },
+        toast.success("Categoria atualizada com sucesso!");
+      } else {
+        await cadastrar(`/categoria`, dadosParaApi, () => {}, {
+          headers: { Authorization: token }
         });
-
-        ToastAlerta("O Tema foi cadastrado com sucesso!", "sucesso");
-      } catch (error: any) {
-        if (error.toString().includes("401")) {
-          handleLogout();
-        } else {
-          ToastAlerta("Erro ao cadastrar o tema!", "erro");
-          console.error(error);
-        }
+        toast.success("Categoria cadastrada com sucesso!");
       }
+      navigate("/categorias");
+    } catch (error: any) {
+      if (error.toString().includes("401")) {
+            handleLogout();
+          }
+      toast.error(`Erro ao salvar categoria.`);
     }
-
-    setIsLoading(false);
-    retornar();
   }
-
-  function retornar() {
-    navigate("/categorias");
-  }
+  const isEditing = !!id;
 
   return (
-    <div className="container flex flex-col items-center justify-center mx-auto">
-      <h1 className="text-4xl text-center my-8">
-        {id === undefined ? "Cadastrar Categoria" : "Editar Categoria"}
-      </h1>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-2xl"
+      >
+        <h2 className="text-3xl font-bold text-center text-[#e54300] mb-8">
+          {isEditing ? "Editar Categoria" : "Cadastrar Categoria"}
+        </h2>
 
-      <form className="w-1/2 flex flex-col gap-4" onSubmit={gerarNovoCategoria}>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="nome">Nome da Categoria</label>
-          <input
-            type="text"
-            placeholder="Digite o nome da categoria"
-            name="nome"
-            className="border-2 border-slate-700 rounded p-2"
-            value={categoria.nome}
-            onChange={atualizarEstado}
-            required
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="descricao">Descrição</label>
-          <input
-            type="text"
-            placeholder="Descreva a categoria"
-            name="descricao"
-            className="border-2 border-slate-700 rounded p-2"
-            value={categoria.descricao}
-            onChange={atualizarEstado}
-            required
-          />
-        </div>
-        <button
-          className="rounded text-white bg-orange-500 hover:bg-orange-700 w-1/2 py-2 mx-auto flex justify-center"
-          type="submit"
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <RotatingLines
-              strokeColor="white"
-              strokeWidth="5"
-              animationDuration="0.75"
-              width="24"
-              visible={true}
+        <div className="gap-x-6 gap-y-4">
+          {/* Coluna 1 */}
+          <div className="space-y-4">
+            <FormField
+              label="Nome da Categoria"
+              name="nome"
+              value={categoria.nome}
+              onChange={handleChange}
+              placeholder="Ex: Bebidas"
             />
-          ) : (
-            <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span>
-          )}
+            <FormField
+              label="Descrição"
+              name="descricao"
+              value={categoria.descricao? categoria.descricao : ""}
+              onChange={handleChange}
+              placeholder="Ex: Bebidas geladas e quentes"
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          // Cores do botão principal atualizadas
+          className="w-full mt-8 bg-[#e54300] hover:bg-[#bf3700] text-white font-bold py-3 rounded-md transition-all duration-300"
+        >
+          {isEditing ? "Atualizar Categoria" : "Criar Categoria"}
         </button>
       </form>
     </div>
   );
 }
-
-export default FormCategoria;
