@@ -57,7 +57,7 @@ export default function ProdutosPage() {
 			icon: "warning",
 			showCancelButton: true,
 			// Cores dos botões do alerta atualizadas
-			confirmButtonColor: "#e54300",
+			confirmButtonColor: "#fa2d37",
 			cancelButtonColor: "#6e7881",
 			confirmButtonText: "Sim, apagar!",
 			cancelButtonText: "Cancelar",

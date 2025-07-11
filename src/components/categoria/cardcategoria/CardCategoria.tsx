@@ -7,17 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "../../ui/card";
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "../../ui/alert-dialog";
 import { Button } from "../../ui/button";
 import { TrashSimple } from "@phosphor-icons/react";
 import { PencilSimple } from "@phosphor-icons/react";
@@ -26,6 +15,7 @@ import { ToastAlerta } from "@/utils/ToastAlerta";
 import { useContext, useState } from "react";
 import AuthContext from "@/contexts/AuthContext/AuthContext";
 import { deletar } from "@/services/Service";
+import Swal from "sweetalert2";
 
 interface CardCategoriaProps {
   categoria: Categoria;
@@ -35,6 +25,24 @@ export default function CardCategoria({ categoria }: CardCategoriaProps) {
   const { usuario, handleLogout } = useContext(AuthContext);
   const token = usuario.token;
   const [isLoading, setIsLoading] = useState(false);
+
+    async function handleDelete(id: number) {
+      Swal.fire({
+        title: "Você tem certeza?",
+        text: "Esta ação não poderá ser desfeita!",
+        icon: "warning",
+        showCancelButton: true,
+        // Cores dos botões do alerta atualizadas
+        confirmButtonColor: "#fa2d37",
+        cancelButtonColor: "#6e7881",
+        confirmButtonText: "Sim, apagar!",
+        cancelButtonText: "Cancelar",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await excluirCategoria();
+        }
+      });
+    }
 
   async function excluirCategoria() {
     setIsLoading(true);
@@ -76,33 +84,20 @@ export default function CardCategoria({ categoria }: CardCategoriaProps) {
           </Button>
         </Link>
 
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button className="bg-red-500 hover:bg-red-600 text-white flex gap-1 items-center">
+            <Button
+              onClick={() => {
+                if (typeof categoria.id === "number") {
+                  handleDelete(categoria.id);
+                } else {
+                  ToastAlerta("ID da categoria inválido!", "erro");
+                }
+              }}
+              className="bg-red-500 hover:bg-red-600 text-white flex gap-1 items-center"
+            >
               <TrashSimple size={20} />
               Excluir
             </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Excluir categoria</AlertDialogTitle>
-              <AlertDialogDescription>
-                Tem certeza que deseja excluir <strong>{categoria.nome}</strong>
-                ? Essa ação não pode ser desfeita.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancelar</AlertDialogCancel>
-              <AlertDialogAction
-                onClick={excluirCategoria}
-                disabled={isLoading}
-                className="bg-orange-600 hover:bg-orange-700 text-white"
-              >
-                {isLoading ? "Excluindo..." : "Confirmar"}
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+
       </CardFooter>
     </Card>
   );
