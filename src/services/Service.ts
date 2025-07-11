@@ -42,13 +42,13 @@ export const cadastrar = async <T = unknown>(
   setDados(resposta.data);
 };
 
-export const atualizar = async <T = unknown>(
+export const atualizar = async (
   url: string,
   dados: object,
-  setDados: (data: T) => void,
+  setDados: Function,
   header: object
 ) => {
-  const resposta = await api.put<T>(url, dados, header);
+  const resposta = await api.put(url, dados, header);
   setDados(resposta.data);
 };
 

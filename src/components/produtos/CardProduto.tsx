@@ -1,5 +1,3 @@
-// src/components/produtos/CardProduto.tsx
-
 import type Produto from "@/models/Produto";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
