@@ -38,9 +38,9 @@ function Login() {
       w-screen
     ">
       <div className="hidden md:inset-0 md:block md:w-1/4 min-w-[550px] md:h-full">
-        <div className="fixed bottom-0 md:w-1/4 min-w-[550px] min-h-[220px] bg-white p-5">
-          <h1 className="text-3xl font-bold text-orange-600">Faça parte do GetFood!</h1>
-          <p className="text-lg text-gray-800 mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum elementum, leo vitae convallis faucibus, urna ligula hendrerit sapien, et semper quam libero vitae lorem. </p>
+        <div className="fixed bottom-0 md:w-1/4 min-w-[550px] min-h-[220px] bg-white p-10">
+          <h1 className="text-3xl font-bold text-orange-600">Fome bateu? A gente entrega!</h1>
+          <p className="text-lg text-gray-800 mt-4">Cadastre-se agora no nosso app e descubra a praticidade de pedir suas comidas favoritas sem sair de casa. São centenas de restaurantes, promoções exclusivas para novos usuários e entrega rápida direto na sua porta.</p>
         </div>
         <LImage src="/img/bgLogin.png" alt="background" className="hidden md:inset-0 md:block md:w-1/4 min-w-[550px] md:h-full " />
       </div>
