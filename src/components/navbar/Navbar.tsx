@@ -73,7 +73,7 @@ export default function Navbar() {
             </NavLink>
 
             <NavLink 
-              to="/contato" 
+              to="/equipe" 
               className={({ isActive }) =>
               `relative ${isActive? 'text-[#e54300]' : ''} 
               hover:opacity-90 transition

@@ -13,6 +13,7 @@ import Categorias from './pages/categorias/Categorias';
 import ProdutoForm from './components/produtos/ProdutoForm';
 import About from './pages/About';
 import FormCategoria from './components/categoria/formcategoria/FormCategoria';
+import SobreEquipe from './pages/sobreequipe/SobreEquipe';
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
                 <Route path="/editarproduto/:id" element={<ProdutoForm />} />
                 <Route path="/editarcategorias/:id" element={<FormCategoria />} />
                 <Route path="/sobre" element={<About />} />
-                <Route path="/equipe" element={<About/>} />
+                <Route path="/equipe" element={<SobreEquipe />} />
               </Route>
             </Routes>
           </div>
