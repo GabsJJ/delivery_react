@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/card";
 import { ToastAlerta } from "@/utils/ToastAlerta";
 import type Usuario from "@/models/Usuario";
-import Button from "@/components/ui/button";
 import {
   step1Schema,
   step2Schema,
@@ -27,6 +26,7 @@ import {
   step4Schema,
   fullCadastroSchema,
 } from "@/utils/ValidacaoEtapas";
+import { Button } from "@/components/ui/button";
 
 type FormData = Omit<Usuario, "id" | "produtos"> & {
   confirmaSenha: string;
