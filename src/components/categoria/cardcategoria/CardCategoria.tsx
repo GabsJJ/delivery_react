@@ -47,9 +47,7 @@ export default function CardCategoria({ categoria }: CardCategoriaProps) {
   async function excluirCategoria() {
     setIsLoading(true);
     try {
-      await deletar(`/categoria/${categoria.id}`, {
-        headers: { Authorization: token },
-      });
+      await deletar(`/categoria/${categoria.id}`);
       ToastAlerta("Categoria excluída com sucesso!", "sucesso");
       window.location.reload();
     } catch (error: unknown) {

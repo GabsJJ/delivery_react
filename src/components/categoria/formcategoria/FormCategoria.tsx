@@ -104,14 +104,10 @@ export default function FormCategorias() {
     try {
       if (isEditing && categoria.id) {
         dadosParaApi.id = categoria.id;
-        await atualizar(`/categoria`, dadosParaApi, () => {}, {
-          headers: { Authorization: token }
-        });
+        await atualizar(`/categoria`, dadosParaApi, () => {});
         toast.success("Categoria atualizada com sucesso!");
       } else {
-        await cadastrar(`/categoria`, dadosParaApi, () => {}, {
-          headers: { Authorization: token }
-        });
+        await cadastrar(`/categoria`, dadosParaApi, () => {});
         toast.success("Categoria cadastrada com sucesso!");
       }
       navigate("/categorias");
