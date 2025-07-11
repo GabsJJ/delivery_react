@@ -1,4 +1,4 @@
-import './App.css'
+import "./App.css";
 
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
@@ -9,11 +9,12 @@ import { CartProvider } from "./contexts/CartProvider";
 import { ToastContainer } from "react-toastify";
 import Login from "./pages/login/login";
 import { AuthProvider } from "./contexts/AuthProvider";
-import Cadastro from './pages/Cadastro/Cadastro';
-import ListaCategoria from './components/listacategoria/ListaCategoria';
-import Produtos from './pages/produtos/Produtos';
-import Categorias from './pages/categorias/Categorias';
-import ProdutoForm from './components/produtos/ProdutoForm';
+import Produtos from "./pages/produtos/Produtos";
+import Categorias from "./pages/categorias/Categorias";
+import ProdutoForm from "./components/produtos/ProdutoForm";
+import Cadastro from "./pages/cadastro/Cadastro";
+import DeletarCategoria from "./components/categoria/deletarcategoria/DeletarCartegoria";
+import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
 function AppLayout() {
   const location = useLocation();
 
@@ -31,10 +32,13 @@ function AppLayout() {
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/produtos" element={<Produtos />} />
           <Route path="/categorias" element={<Categorias />} />
-          <Route path="/novoproduto" element={<ProdutoForm />} />
+          <Route path="/editarcategorias/:id" element={<FormCategoria />} />
+          <Route path="/deletarcategorias/:id" element={<DeletarCategoria />} />
+          <Route path="/novacategoria" element={<FormCategoria />} />
           <Route path="/editarproduto/:id" element={<ProdutoForm />} />
+          <Route path="/novoproduto" element={<ProdutoForm />} />
+          <Route path="/produtos" element={<Produtos />} />
         </Routes>
       </div>
 

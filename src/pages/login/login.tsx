@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { RotatingLines } from "react-loader-spinner";
 import type UsuarioLogin from "@/models/UsuarioLogin";
-import Button from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 function Login() {
   const navigate = useNavigate();
