@@ -29,7 +29,7 @@ function Login() {
 
   async function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    handleLogin(usuarioLogin).then(() => navigate("/home"));
+    await handleLogin(usuarioLogin).then(() => navigate("/home"));
   }
 
   return (

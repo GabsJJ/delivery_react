@@ -17,8 +17,8 @@ function App() {
   return (
     <AuthProvider>
       <CartProvider> {/* ✅ envolve toda a árvore com o provider */}
-        <ToastContainer />
         <BrowserRouter>
+          <ToastContainer />
           <div className='grid h-screen grid-rows-[auto_1fr_auto]'> {/* Grid da página toda */}
             <Routes>
               <Route element={ <AuthLayout /> }>

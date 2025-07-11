@@ -31,6 +31,10 @@ body {
 
 @theme {
   --font-inter: "Inter", "sans-serif";
+  --color-laranja-tema: #E54300;
+  --color-laranja-escuro: #C93C00;
+  
+
 }
 
 @theme inline {
