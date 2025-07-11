@@ -1,72 +1,128 @@
-import { Link } from "react-router-dom";
-import { FaShoppingBag, FaAngleDown, FaSignInAlt } from "react-icons/fa";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+import { FaShoppingBag, FaSignInAlt } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import logo from "../../assets/logo_navbar2.svg";
 import { useCart } from "@/contexts/CartContext/useCart";
+import '@/utils/glass.css'
+import { useContext, useEffect, useState } from "react";
+import AuthContext from "@/contexts/AuthContext/AuthContext";
+import { ToastAlerta } from "@/utils/ToastAlerta";
 
 export default function Navbar() {
   const { cartItemCount } = useCart();
+  const navigate = useNavigate();
+  const { usuario, handleLogout } = useContext(AuthContext);
+  const [isLogado, setIsLogado] = useState(false);
+
+  useEffect(() => {
+    if (usuario.token !== "") {
+      setIsLogado(true)
+    }
+  }, [usuario.token, navigate]);
+
+  const logout = () => {
+    try{
+      handleLogout();
+      ToastAlerta("Logout realizado. Até mais!", "sucesso");
+    } catch(error) {
+      ToastAlerta("Erro ao fazer o logout", "erro");
+      console.log(error)
+    }
+  }
 
   return (
-    <nav className="w-full bg-gray-300 border-b border-gray-400 h-27 px-50 flex items-center">
+    <nav className="w-full bg-gray-300 h-25 px-40 flex items-center justify-between glass">
       <div className="w-full flex items-center justify-between h-full">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="GetFood Logo" className="h-42 w-auto" />
+          <img src={logo} alt="GetFood-Logo" className="h-35 w-auto" />
         </Link>
 
-        {/* Menu */}
-        <div className="flex items-center gap-8 text-xl font-medium">
-          <Link
-            to="/sobre"
-            className="relative text-[#e54300] hover:opacity-90 transition"
-          >
-            Por que GetFood?
-            <div className="absolute left-1/2 transform -translate-x-1/2 mt-1 w-1 h-1 bg-[#e54300] rounded-full" />
-          </Link>
+        
+          {/* Menu */}
+          <div className="flex items-center gap-5 text-lg font-medium">
+            <NavLink
+              to="/sobre"
+              className={({ isActive }) =>
+              `relative ${isActive? 'text-[#e54300]' : ''} 
+              hover:opacity-90 transition
+              hover:text-[#e54300]
+            `}>
+              Por que GetFood?
+            </NavLink>
 
-          <Link
-            to="/produtos"
-            className="flex items-center gap-1 hover:text-[#e54300] transition"
-          >
-            Cardápio <FaAngleDown className="text-xs" />
-          </Link>
+            <NavLink
+              to="/produtos"
+              className={({ isActive }) =>
+              `flex items-center gap-1 
+              ${isActive? 'text-[#e54300]' : ''} 
+              hover:opacity-90 transition
+              hover:text-[#e54300]
+            `}>
+              Cardápio
+            </NavLink>
 
-          <Link to="/categorias" className="hover:text-[#e54300] transition">
-            Categorias
-          </Link>
+            <NavLink 
+              to="/categorias" 
+              className={({ isActive }) =>
+              `relative ${isActive? 'text-[#e54300]' : ''} 
+              hover:opacity-90 transition
+              hover:text-[#e54300]
+            `}>
+              Categorias
+            </NavLink>
 
-          <Link to="/sobre" className="hover:text-[#e54300] transition">
-            Contato
-          </Link>
-        </div>
-
-        {/* Ações à direita */}
-        <div className="flex items-center gap-6 text-[#333] text-lg">
-          {/* Pesquisa */}
-          <button className="hover:text-[#e54300] transition">
-            <FiSearch />
-          </button>
-
-          {/* Carrinho com badge */}
-          <div className="relative">
-            <FaShoppingBag className="text-xl hover:text-[#e54300] transition" />
-            {cartItemCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-[#e54300] text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                {cartItemCount}
-              </span>
-            )}
+            <NavLink 
+              to="/contato" 
+              className={({ isActive }) =>
+              `relative ${isActive? 'text-[#e54300]' : ''} 
+              hover:opacity-90 transition
+              hover:text-[#e54300]
+            `}>
+              Contato
+            </NavLink>
           </div>
 
-          {/* Botão de login */}
-          <Link
-            to="/login"
-            className="bg-[#e54300] hover:bg-[#c93c00] text-white flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition"
-          >
-            <FaSignInAlt /> Login
-          </Link>
+          {/* Ações à direita */}
+          <div className="flex items-center gap-5 justify-end">
+            {/* Pesquisa */}
+            <button className="text-[#333] hover:text-[#e54300] transition text-lg">
+              <FiSearch className="cursor-pointer" />
+            </button>
+
+            {/* Carrinho com badge */}
+            <div className="relative">
+              <FaShoppingBag className="text-xl hover:text-[#e54300] transition cursor-pointer" />
+              {cartItemCount > 0 && (
+                <span className="
+                  absolute -top-2 -right-2 bg-[#e54300] text-white text-lg w-5 h-5 flex items-center justify-center rounded-full
+                ">
+                  {cartItemCount}
+                </span>
+              )}
+            </div>
+
+            {/* Botão de login */}
+            {!isLogado && <Link
+              to="/login"
+              className="bg-[#e54300] hover:bg-[#c93c00] text-white flex items-center gap-2 px-4 py-2 rounded-full text-base font-medium transition"
+            >
+              <FaSignInAlt /> Login
+            </Link>
+            }
+            {/* Botão de Logout */}
+            {isLogado &&
+              <Link
+                to="/login"
+                onClick={logout}
+                className="bg-[#e54300] hover:bg-[#c93c00] text-white flex items-center gap-1 px-4 py-2 rounded-full text-base font-medium transition"
+              >
+                <FaSignInAlt /> Sair
+              </Link>
+            }
+          </div>
         </div>
-      </div>
+      
     </nav>
   );
 }

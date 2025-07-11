@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import AuthContext from "@/contexts/AuthContext/AuthContext";
 import {
@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { RotatingLines } from "react-loader-spinner";
 import type UsuarioLogin from "@/models/UsuarioLogin";
 import { Button } from "@/components/ui/button";
-import './glass.css'
+import '@/utils/glass.css'
 import { LImage } from "@/components/limage/LImage";
 
 function Login() {
@@ -21,21 +21,15 @@ function Login() {
   const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>(
     {} as UsuarioLogin
   );
-  const { usuario, handleLogin, isLoading } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (usuario.token !== "") {
-      navigate("/home");
-    }
-  }, [usuario.token, navigate]);
+  const { handleLogin, isLoading } = useContext(AuthContext);
 
   function atualizarEstado(e: React.ChangeEvent<HTMLInputElement>) {
     setUsuarioLogin({ ...usuarioLogin, [e.target.name]: e.target.value });
   }
 
-  function login(e: React.FormEvent<HTMLFormElement>) {
+  async function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    handleLogin(usuarioLogin);
+    handleLogin(usuarioLogin).then(() => navigate("/home"));
   }
 
   return (
@@ -44,7 +38,7 @@ function Login() {
       w-screen
     ">
       <div className="hidden md:inset-0 md:block md:w-1/4 min-w-[550px] md:h-full">
-        <div className="fixed bottom-0 w-1/4 min-w-[550px] min-h-[220px] bg-white p-5">
+        <div className="fixed bottom-0 md:w-1/4 min-w-[550px] min-h-[220px] bg-white p-5">
           <h1 className="text-3xl font-bold text-orange-600">Faça parte do GetFood!</h1>
           <p className="text-lg text-gray-800 mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum elementum, leo vitae convallis faucibus, urna ligula hendrerit sapien, et semper quam libero vitae lorem. </p>
         </div>

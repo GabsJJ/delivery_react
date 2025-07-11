@@ -1,15 +1,23 @@
 import ListaCategoria from "@/components/listacategoria/ListaCategoria"
-import { Button } from "@/components/ui/button"
-import { Plus } from '@phosphor-icons/react'
+import { PlusIcon } from '@phosphor-icons/react'
+import { Link } from "react-router-dom"
 
 function Categorias() {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <div className="flex justify-end px-4">
-        <Button className="bg-orange-600 hover:bg-orange-800 transition duration-300">
-          <Plus size={32} color="#fafafa" />
+    <div className="container mx-auto py-12 px-4 w-full">
+      <div className="flex justify-between px-4">
+        <h1 className="text-4xl font-bold text-gray-800">Categorias</h1>
+        <Link
+          to="/"
+          className="
+            bg-[#e54300] hover:bg-[#bf3700]
+            text-white font-bold py-2 px-4 rounded-md 
+            transition-colors
+            flex items-center gap-2
+        ">
+          <PlusIcon size={20} color="#fafafa" />
           Nova Categoria
-        </Button>
+        </Link>
       </div>
       <ListaCategoria />
     </div>
