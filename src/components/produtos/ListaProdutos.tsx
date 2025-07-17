@@ -71,7 +71,7 @@ function ListaProdutos() {
 		Swal.fire({
 			title: "O que é nutriscore?",
 			icon: "question",
-			iconColor: "#E54300",
+			iconColor: "#ff5d00",
 			html: `
 				<p class="text-justify text-lg w-[90%] justify-center mx-auto">
 					O NutriScore é um sistema de rotulagem nutricional criado para ajudar os consumidores 
@@ -107,7 +107,7 @@ function ListaProdutos() {
 		Swal.fire({
 			title: "Informações nutricionais",
 			icon: "info",
-			iconColor: "#4a5565",
+			iconColor: "#ff5d00",
 			html: `
 				<div class="text-center text-lg w-[90%] justify-center mx-auto">
 					<p>Energia (kJ): ${produtoSelecionado?.energia}</p>
@@ -121,7 +121,7 @@ function ListaProdutos() {
 				</div>
 			`,
 			showCloseButton: true,
-			showCancelButton: true,
+			showCancelButton: false,
 			focusConfirm: false,
 			confirmButtonText: `
 				<i class="fa fa-thumbs-up"></i> Entendi!

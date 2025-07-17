@@ -121,12 +121,12 @@ export default function FormCategorias() {
   const isEditing = !!id;
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+    <div className="flex justify-center items-center h-full bg-gray-100 p-4">
       <form
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-2xl"
       >
-        <h2 className="text-3xl font-bold text-center text-[#e54300] mb-8">
+        <h2 className="text-3xl font-bold text-center text-laranja-tema mb-8">
           {isEditing ? "Editar Categoria" : "Cadastrar Categoria"}
         </h2>
 
@@ -153,7 +153,7 @@ export default function FormCategorias() {
         <button
           type="submit"
           // Cores do botão principal atualizadas
-          className="w-full mt-8 bg-[#e54300] hover:bg-[#bf3700] text-white font-bold py-3 rounded-md transition-all duration-300"
+          className="w-full mt-8 bg-laranja-tema hover:bg-laranja-escuro cursor-pointer text-white font-bold py-3 rounded-md transition-all duration-300"
         >
           {isEditing ? "Atualizar Categoria" : "Criar Categoria"}
         </button>
