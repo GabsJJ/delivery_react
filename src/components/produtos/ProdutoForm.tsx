@@ -39,7 +39,7 @@ const FormField = ({
 	<div>
 		<label
 			htmlFor={name}
-			className="block text-sm font-bold text-gray-700 mb-2"
+			className="block text-sm font-bold text-cinza-texto mb-2"
 		>
 			{label}
 		</label>
@@ -161,7 +161,7 @@ export default function ProdutoForm() {
 				onSubmit={handleSubmit}
 				className="glass p-8 rounded-2xl shadow-lg w-full max-w-2xl my-2"
 			>
-				<h2 className="text-3xl font-bold text-center text-[#e54300] mb-8">
+				<h2 className="text-3xl font-bold text-center text-laranja-tema mb-8">
 					{isEditing ? "Editar Produto" : "Cadastrar Produto"}
 				</h2>
 
@@ -193,7 +193,7 @@ export default function ProdutoForm() {
 						<div>
 							<label
 								htmlFor="categoria"
-								className="block text-sm font-bold text-gray-700 mb-2"
+								className="block text-sm font-bold text-cinza-texto mb-2"
 							>
 								Categoria
 							</label>
@@ -201,7 +201,7 @@ export default function ProdutoForm() {
 								id="categoria"
 								name="categoria"
 								// Cor do anel de foco atualizada
-								className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#e54300]"
+								className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-laranja-tema"
 								value={produto.categoria?.id || ""}
 								onChange={handleCategoriaChange}
 								required
@@ -298,7 +298,7 @@ export default function ProdutoForm() {
 				<button
 					type="submit"
 					// Cores do botão principal atualizadas
-					className="w-full mt-8 bg-[#e54300] hover:bg-[#bf3700] text-white font-bold py-3 rounded-md transition-all duration-300"
+					className="w-full mt-8 bg-laranja-tema hover:bg-laranja-escuro cursor-pointer text-white font-bold py-3 rounded-md transition-all duration-300"
 				>
 					{isEditing ? "Atualizar Produto" : "Criar Produto"}
 				</button>

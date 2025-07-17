@@ -43,9 +43,9 @@ export default function Navbar() {
           <NavLink
             to="/sobre"
             className={({ isActive }) =>
-              `relative ${isActive ? "text-[#e54300]" : ""}
+              `relative ${isActive ? "text-laranja-tema" : ""}
               hover:opacity-90 transition
-              hover:text-[#e54300]`
+              hover:text-laranja-escuro`
             }
           >
             Por que GetFood?
@@ -57,9 +57,9 @@ export default function Navbar() {
                 to="/produtos"
                 className={({ isActive }) =>
                   `flex items-center gap-1
-                  ${isActive ? "text-[#e54300]" : ""}
+                  ${isActive ? "text-laranja-tema" : ""}
                   hover:opacity-90 transition
-                  hover:text-[#e54300]`
+                  hover:text-laranja-escuro`
                 }
               >
                 Cardápio
@@ -68,9 +68,9 @@ export default function Navbar() {
               <NavLink
                 to="/categorias"
                 className={({ isActive }) =>
-                  `relative ${isActive ? "text-[#e54300]" : ""}
+                  `relative ${isActive ? "text-laranja-tema" : ""}
                   hover:opacity-90 transition
-                  hover:text-[#e54300]`
+                  hover:text-laranja-escuro`
                 }
               >
                 Categorias
@@ -81,9 +81,9 @@ export default function Navbar() {
           <NavLink
             to="/equipe"
             className={({ isActive }) =>
-              `relative ${isActive ? "text-[#e54300]" : ""}
+              `relative ${isActive ? "text-laranja-tema" : ""}
               hover:opacity-90 transition
-              hover:text-[#e54300]`
+              hover:text-laranja-escuro`
             }
           >
             Contato
@@ -94,16 +94,16 @@ export default function Navbar() {
         <div className="flex items-center gap-5 justify-end">
           {isLogado && (
             <>
-              <button className="text-[#333] hover:text-[#e54300] transition text-lg">
+              <button className="text-cinza-texto hover:text-laranja-tema transition text-lg">
                 <FiSearch className="cursor-pointer" />
               </button>
 
               <div className="relative">
-                <FaShoppingBag className="text-xl hover:text-[#e54300] transition cursor-pointer" />
+                <FaShoppingBag className="text-xl hover:text-laranja-tema transition cursor-pointer" />
                 {cartItemCount > 0 && (
                   <span
                     className="
-                    absolute -top-2 -right-2 bg-[#e54300] text-white text-lg w-5 h-5 flex items-center justify-center rounded-full
+                    absolute -top-2 -right-2 bg-laranja-tema text-white text-lg w-5 h-5 flex items-center justify-center rounded-full
                   "
                   >
                     {cartItemCount}
@@ -117,7 +117,7 @@ export default function Navbar() {
           {!isLogado ? (
             <Link
               to="/login"
-              className="bg-[#e54300] hover:bg-[#c93c00] text-white flex items-center gap-2 px-4 py-2 rounded-full text-base font-medium transition"
+              className="bg-laranja-tema hover:bg-laranja-escuro text-white flex items-center gap-2 px-4 py-2 rounded-full text-base font-medium transition"
             >
               <FaSignInAlt /> Login
             </Link>
@@ -125,7 +125,7 @@ export default function Navbar() {
             <Link
               to="/login"
               onClick={logout}
-              className="bg-[#e54300] hover:bg-[#c93c00] text-white flex items-center gap-1 px-4 py-2 rounded-full text-base font-medium transition"
+              className="bg-laranja-tema hover:bg-laranja-escuro text-white flex items-center gap-1 px-4 py-2 rounded-full text-base font-medium transition"
             >
               <FaSignInAlt /> Sair
             </Link>

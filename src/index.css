@@ -31,12 +31,10 @@ body {
 
 @theme {
   --font-inter: "Inter", "sans-serif";
-  --color-laranja-tema: #E54300;
+  --color-laranja-tema: #ff5d00;
   --color-laranja-escuro: #C93C00;
   --color-cinza-texto: #101828;
   --color-cinza-alt: #4a5565;
-
-
 }
 
 @theme inline {

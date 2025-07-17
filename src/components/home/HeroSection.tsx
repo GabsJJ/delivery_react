@@ -33,14 +33,14 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 items-center gap-16">
           {/* LADO ESQUERDO */}
           <div className="space-y-6 text-center lg:text-left">
-            <p className="bg-orange-100 text-[#ff5d00] text-sm font-semibold py-1 px-3 rounded-full inline-flex items-center gap-1">
+            <p className="bg-orange-100 text-laranja-tema text-sm font-semibold py-1 px-3 rounded-full inline-flex items-center gap-1">
               Mais que Rápido
               <ArrowUpRight className="w-4 h-4" />
             </p>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-              Garanta a <span className="text-[#ff5d00]">Melhor Oferta</span> em
-              Fast Food & <span className="text-[#ff5d00]">Restaurantes</span>
+              Garanta a <span className="text-laranja-tema">Melhor Oferta</span> em
+              Fast Food & <span className="text-laranja-tema">Restaurantes</span>
             </h1>
 
             <p className="text-lg text-gray-600 max-w-md mx-auto lg:mx-0">
@@ -51,7 +51,7 @@ const HeroSection = () => {
             {!isLogado && (
               <div className="flex items-center justify-center lg:justify-start gap-6 pt-4">
                 <Link to="/cadastro">
-                  <button className="bg-[#ff5d00] hover:bg-orange-600 text-white font-bold text-base px-8 py-3 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">
+                  <button className="bg-laranja-tema hover:bg-laranja-escuro text-white font-bold text-base px-8 py-3 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">
                     Começar Agora
                   </button>
                 </Link>
