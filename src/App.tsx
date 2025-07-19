@@ -9,7 +9,7 @@ import DefaultLayout from "./layouts/DefaultLayout";
 import Produtos from "./pages/produtos/Produtos";
 import Categorias from "@/pages/categorias/Categorias";
 import ProdutoForm from "./components/produtos/ProdutoForm";
-import About from "./pages/About";
+import AboutPage from "./pages/sobre/About";
 import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
 import SobreEquipe from "./pages/sobreequipe/SobreEquipe";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -40,7 +40,7 @@ function App() {
                   path="/editarcategorias/:id"
                   element={<FormCategoria />}
                 />
-                <Route path="/sobre" element={<About />} />
+                <Route path="/sobre" element={<AboutPage />} />
                 <Route path="/equipe" element={<SobreEquipe />} />
               </Route>
             </Routes>

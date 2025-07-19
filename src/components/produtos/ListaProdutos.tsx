@@ -36,7 +36,7 @@ function ListaProdutos() {
 
 	useEffect(() => {
 		if (token === "") {
-			navigate("/login");
+			navigate("/home");
 			ToastAlerta("Você precisa estar logado para acessar essa página.", "info");
 		}
 	}, [navigate, token]);
@@ -82,20 +82,11 @@ function ListaProdutos() {
 					mais próximo da letra A ele estará.
 				</p>
 			`,
-			showCloseButton: true,
-			showCancelButton: true,
 			focusConfirm: false,
-			confirmButtonText: `
-				<i class="fa fa-thumbs-up"></i> Entendi!
-			`,
-			confirmButtonAriaLabel: "Thumbs up",
-			cancelButtonText: `
-				<i class="fa fa-thumbs-down"></i> Fechar
-			`,
-			cancelButtonAriaLabel: "Thumbs down",
+			confirmButtonText: "Entendi!",
+			confirmButtonAriaLabel: "Confirmar",
 			customClass: {
 				confirmButton: "bg-laranja-tema hover:bg-laranja-escuro text-white font-medium py-2 px-4 rounded",
-				cancelButton: "bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium py-2 px-4 rounded ml-2"
 			},
 			buttonsStyling: false
 		});
@@ -120,20 +111,11 @@ function ListaProdutos() {
 					<p>Proteínas (g): ${produtoSelecionado?.proteinas}</p>
 				</div>
 			`,
-			showCloseButton: true,
-			showCancelButton: false,
 			focusConfirm: false,
-			confirmButtonText: `
-				<i class="fa fa-thumbs-up"></i> Entendi!
-			`,
-			confirmButtonAriaLabel: "Thumbs up",
-			cancelButtonText: `
-				<i class="fa fa-thumbs-down"></i> Fechar
-			`,
-			cancelButtonAriaLabel: "Thumbs down",
+			confirmButtonText: "Entendi!",
+			confirmButtonAriaLabel: "Confirmar",
 			customClass: {
 				confirmButton: "bg-laranja-tema hover:bg-laranja-escuro text-white font-medium py-2 px-4 rounded",
-				cancelButton: "bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium py-2 px-4 rounded ml-2"
 			},
 			buttonsStyling: false
 		});

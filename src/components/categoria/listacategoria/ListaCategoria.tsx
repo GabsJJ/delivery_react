@@ -29,7 +29,7 @@ function ListaCategoria() {
 
   useEffect(() => {
     if (token === "") {
-      navigate("/login");
+      navigate("/home");
       toast.info("Você precisa estar logado para acessar essa página.");
     }
   }, [navigate, token]);
