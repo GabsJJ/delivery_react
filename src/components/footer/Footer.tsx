@@ -7,7 +7,7 @@ function Footer(): JSX.Element {
 
   // Componente auxiliar para os títulos das colunas para evitar repetição
   const SectionTitle = ({ title }: { title: string }) => (
-    <h3 className="text-lg font-bold text-gray-800 mb-4">{title}</h3>
+    <h3 className="text-lg font-bold text-cinza-texto mb-4">{title}</h3>
   );
 
   // Componente auxiliar para os links do rodapé
@@ -21,7 +21,7 @@ function Footer(): JSX.Element {
     <li>
       <Link
         to={to}
-        className="text-gray-600 hover:text-[#e54300] hover:underline transition-colors duration-300"
+        className="text-cinza-alt hover:text-laranja-tema transition-colors duration-300"
       >
         {children}
       </Link>
@@ -30,19 +30,19 @@ function Footer(): JSX.Element {
 
   return (
     <footer className="
-      bg-linear-to-b from-white from-75% to-orange-300
-      shadow-2xl/80
+      bg-white
+      shadow-2xl/60 rounded-t-3xl
     ">
       <div className="container mx-auto px-6 py-8">
         {/* Grid principal que se adapta para telas menores */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
           {/* Coluna 1: Logo e Social */}
           <div className="lg:col-span-2">
             <h2 className="text-3xl font-bold">
-              <span className="text-gray-900">Get</span>
-              <span className="text-[#e54300]">Food</span>
+              <span className="text-cinza-texto">Get</span>
+              <span className="text-laranja-tema">Food</span>
             </h2>
-            <p className="text-gray-600 mt-4 max-w-md">
+            <p className="text-cinza-alt mt-4 max-w-md">
               Nossa missão é encher sua barriga com comida deliciosa e entrega
               rápida.
             </p>
@@ -51,7 +51,7 @@ function Footer(): JSX.Element {
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-[#e54300] transition-colors"
+                className="text-cinza-alt hover:text-laranja-tema transition-colors"
               >
                 <FaInstagram size={24} />
               </a>
@@ -59,7 +59,7 @@ function Footer(): JSX.Element {
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-[#e54300] transition-colors"
+                className="text-cinza-alt hover:text-laranja-tema transition-colors"
               >
                 <FaFacebookF size={24} />
               </a>
@@ -67,7 +67,7 @@ function Footer(): JSX.Element {
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-[#e54300] transition-colors"
+                className="text-cinza-alt hover:text-laranja-tema transition-colors"
               >
                 <FaTwitter size={24} />
               </a>
@@ -110,7 +110,7 @@ function Footer(): JSX.Element {
 
         {/* Linha do Copyright */}
         <div className="mt-12 pt-8 border-t border-gray-200 text-center">
-          <p className="text-gray-500 text-sm">
+          <p className="text-cinza-texto text-sm">
             Copyright &copy; {currentYear} GetFood. Todos os direitos
             reservados.
           </p>

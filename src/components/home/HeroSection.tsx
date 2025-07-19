@@ -51,7 +51,7 @@ const HeroSection = () => {
             {!isLogado && (
               <div className="flex items-center justify-center lg:justify-start gap-6 pt-4">
                 <Link to="/cadastro">
-                  <button className="bg-laranja-tema hover:bg-laranja-escuro text-white font-bold text-base px-8 py-3 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">
+                  <button className="bg-laranja-tema hover:bg-laranja-escuro text-white font-bold text-base px-8 py-3 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 cursor-pointer">
                     Começar Agora
                   </button>
                 </Link>
@@ -119,7 +119,7 @@ const HeroSection = () => {
               />
             </div>
 
-            <div className="absolute top-28 -left-10 bg-white p-3 rounded-xl shadow-lg flex items-center gap-3 z-20 w-48">
+            <div className="absolute top-28 -left-5 bg-white p-3 rounded-xl shadow-lg flex items-center gap-3 z-20 w-48">
               <img
                 src={IMAGES.CHEF_AVATAR}
                 className="w-10 h-10 rounded-full object-cover"
