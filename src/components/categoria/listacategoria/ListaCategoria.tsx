@@ -58,7 +58,7 @@ function ListaCategoria() {
                 lg:grid-cols-3 gap-8 w-full"
         >
           {categorias.map((categoria) => (
-            <CardCategoria key={categoria.id} categoria={categoria} fetch={fetchCategorias} />
+            <CardCategoria key={categoria.id} categoria={categoria} fetchApi={fetchCategorias} />
           ))}
         </div>
       </div>
