@@ -122,32 +122,32 @@ function ListaProdutos() {
 	}
 
     return (
-        <div className="flex my-8">
-            <div className="container flex flex-col justify-start mx-2 items-center w-full">
-                {isLoading && (
-                    <div className="flex justify-center items-center w-full h-full">
-                        <ClipLoader size={100} color="#e54300"/>
-                    </div>
-                )}
+        <div className="flex my-8 justify-center items-center">
+			{isLoading && (
+				<div className="flex justify-center items-center w-full h-full">
+					<ClipLoader size={100} color="#e54300"/>
+				</div>
+			)}
+			
+			{!isLoading && produtos.length === 0 && (
+				<span className="text-center text-gray-500 mt-16 w-full">
+					Nenhuma categoria foi encontrada!
+				</span>
+			)}
 
-                {produtos.length === 0 && !isLoading ? (
-                    <p className="text-center text-gray-500 mt-16">
-                        Nenhum produto encontrado...
-                    </p>
-                ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 w-full">
-                        {produtos.map((produto) => (
-                            <CardProduto
-                                key={produto.id}
-                                produto={produto}
-                                onDelete={handleDelete}
-								onNutriscore={handleNutriscore}
-                                onNutrInfo={handleNutriInfo}
-                            />
-                        ))}
-                    </div>
-                )}
-            </div>
+			{!isLoading && produtos.length != 0 &&
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 w-full">
+					{produtos.map((produto) => (
+						<CardProduto
+							key={produto.id}
+							produto={produto}
+							onDelete={handleDelete}
+							onNutriscore={handleNutriscore}
+							onNutrInfo={handleNutriInfo}
+						/>
+					))}
+				</div>
+			}
         </div>
     );
 }

@@ -8,8 +8,8 @@ import {
   CardTitle,
 } from "../../ui/card";
 import { Button } from "../../ui/button";
-import { TrashSimple } from "@phosphor-icons/react";
-import { PencilSimple } from "@phosphor-icons/react";
+import { TrashSimpleIcon } from "@phosphor-icons/react";
+import { PencilSimpleIcon } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 import { ToastAlerta } from "@/utils/ToastAlerta";
 import { useContext, useState } from "react";
@@ -78,7 +78,7 @@ export default function CardCategoria({ categoria, fetchApi }: CardCategoriaProp
       <CardFooter className="flex justify-end gap-2">
         <Link to={`/editarcategorias/${categoria.id}`}>
           <Button className="bg-green-600 hover:bg-green-700 text-white flex gap-1 items-center">
-            <PencilSimple size={20} />
+            <PencilSimpleIcon size={20} />
             Editar
           </Button>
         </Link>
@@ -93,7 +93,7 @@ export default function CardCategoria({ categoria, fetchApi }: CardCategoriaProp
               }}
               className="bg-red-500 hover:bg-red-600 text-white flex gap-1 items-center"
             >
-              <TrashSimple size={20} />
+              <TrashSimpleIcon size={20} />
               Excluir
             </Button>
 

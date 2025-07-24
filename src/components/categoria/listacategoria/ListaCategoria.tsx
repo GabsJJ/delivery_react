@@ -39,8 +39,7 @@ function ListaCategoria() {
   }, []);
 
   return (
-    <div className="flex my-8">
-      <div className="container flex flex-col mx-2 justify-center items-center">
+    <div className="flex my-8 justify-center items-center">
         {isLoading && (
           <div className="flex justify-center items-center w-full h-full">
             <ClipLoader size={100} color="#e54300"/>
@@ -48,20 +47,21 @@ function ListaCategoria() {
         )}
 
         {!isLoading && categorias.length === 0 && (
-          <span className="text-center text-gray-500 mt-16">
+          <span className="text-center text-gray-500 mt-16 w-full">
             Nenhuma categoria foi encontrada!
           </span>
         )}
 
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 
-                lg:grid-cols-3 gap-8 w-full"
-        >
-          {categorias.map((categoria) => (
-            <CardCategoria key={categoria.id} categoria={categoria} fetchApi={fetchCategorias} />
-          ))}
-        </div>
-      </div>
+        {!isLoading && categorias.length != 0 &&
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 
+                  lg:grid-cols-3 gap-8 w-full"
+          >
+            {categorias.map((categoria) => (
+              <CardCategoria key={categoria.id} categoria={categoria} fetchApi={fetchCategorias} />
+            ))}
+          </div>
+        }
     </div>
   );
 }
