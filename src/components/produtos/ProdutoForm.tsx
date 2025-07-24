@@ -62,8 +62,11 @@ const FormField = ({
 export default function ProdutoForm() {
 	const navigate = useNavigate();
 	const { id } = useParams<{ id: string }>();
+	const { usuario } = useContext(AuthContext);
 
-	const { usuario, handleLogout } = useContext(AuthContext);
+	// ... (toda a lógica de useState, useEffect, handleChange, etc. continua a mesma)
+	const [categorias, setCategorias] = useState<Categoria[]>([]);
+	const [produto, setProduto] = useState<Produto>({} as Produto);
 	const token = usuario.token;
 
 	useEffect(() => {
@@ -71,34 +74,31 @@ export default function ProdutoForm() {
 			alert("Você precisa estar logado para acessar essa página.");
 			navigate("/login");
 		}
-	}, [token]);
-
-	// ... (toda a lógica de useState, useEffect, handleChange, etc. continua a mesma)
-	const [categorias, setCategorias] = useState<Categoria[]>([]);
-	const [produto, setProduto] = useState<Produto>({} as Produto);
+	}, [token, navigate]);
+	
 	useEffect(() => {
 		async function fetchData() {
 			try {
 				await buscar("/categoria", setCategorias);
-			} catch (error: any) {
+			} catch (error) {
 				if (error.toString().includes("401")) {
-					handleLogout();
+					navigate("/produtos");
 				}
 				toast.error("Erro ao buscar categorias.");
 			}
 			if (id) {
 				try {
-					await buscar(`/produtos/${id}`,(dados: Produto) => setProduto(dados));
-				} catch (error: any) {
+					await buscar(`/produtos/${id}`, setProduto);
+				} catch (error) {
 					if (error.toString().includes("401")) {
-						handleLogout();
+						navigate("/produtos");
 					}
 					toast.error("Erro ao buscar dados do produto.");
 				}
 			}
 		}
 		fetchData();
-	}, [id]);
+	}, [id, navigate]);
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -139,16 +139,16 @@ export default function ProdutoForm() {
 		try {
 			if (isEditing && produto.id) {
        			dadosParaApi.id = produto.id;
-				await atualizar(`/produtos`, dadosParaApi, () => {});
+				await atualizar(`/produtos`, dadosParaApi, setProduto);
 				toast.success("Produto atualizado com sucesso!");
 			} else {
-				await cadastrar(`/produtos`, dadosParaApi, () => {});
+				await cadastrar(`/produtos`, dadosParaApi, setProduto);
 				toast.success("Produto cadastrado com sucesso!");
 			}
 			navigate("/produtos");
-		} catch (error: any) {
+		} catch (error) {
       		if (error.toString().includes("401")) {
-				handleLogout();
+				navigate('/produtos')
 			}
 			toast.error(`Erro ao salvar produto.`);
 		}
